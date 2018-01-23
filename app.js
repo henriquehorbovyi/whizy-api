@@ -44,15 +44,6 @@ app.get("/users/:user", (req,res) => {
 	res.send(data);
 });
 
-app.post('/create', (req,res) => {
-	console.log(req.body.name);
-	var user = {
-		name : req.body.name,
-		pass : req.body.pass 
-	};
-	res.send(user);
-});
-
 var handleErros = (err,req,res, next) => { 
 	res.status(500).send("Algo está errado!");
 };
