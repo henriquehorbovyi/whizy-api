@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const userRouter  = require('./user-routes')
 const app = express();
 
-const PORT = 3000;
+const PORT = 7000;
 const HOST = 'localhost';
 
 
