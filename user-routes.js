@@ -5,15 +5,12 @@ router.all('*', (req, res, next) => {
 	console.log('User Routes');
 	next();
 });
-
-
 router.get('/', (req,res) => {
 	var data = {
 		resp : "user api!"
 	};
 	res.json(data);
 });
-
 router.post('/create', (req,res) => {
 	console.log(req.body.name+" saved!");
 	var user = {
@@ -22,6 +19,4 @@ router.post('/create', (req,res) => {
 	};
 	res.send(user);
 });
-
-
 module.exports = router;
