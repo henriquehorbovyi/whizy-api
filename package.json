@@ -1,0 +1,19 @@
+{
+  "name": "whizy",
+  "version": "1.0.0",
+  "description": "This is an api for whizy app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "whizy",
+    "api"
+  ],
+  "author": "Henry",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2"
+  }
+}
