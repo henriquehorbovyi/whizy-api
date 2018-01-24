@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const userRouter  = require('./user-routes')
+const userRouter  = require('./routes/user-routes');
 const app = express();
 
 const PORT = 7000;
@@ -11,41 +11,19 @@ app.use((req, res, next) => {
 	console.log("Primeiro middleware");
 	next();
 });
-
 app.use(bodyParser.json());
-app.use('/user', userRouter);
-
-	/*, (req, res, next) => {
-	console.log("Segundo middleware");
-	next();
-});
-app.use((req, res, next) => {
-	console.log("Terceiro middleware");
-	next();
-});*/
-
+app.use('/users', userRouter);
 
 
 app.get("/", (req,res) => {
-	res.send("api running!");
-});
-app.get("/date", (req,res) =>{
-	var data = {
-		data : Date.now(),
-		resposta : "Success"
-	}
-	res.send(data);
-});
-app.get("/users/:user", (req,res) => {
-	var id = req.params.user;
-	var data = {
-		id : id
-	}
-	res.send(data);
+	res.json({message : "api running!"});
 });
 
+
 var handleErros = (err,req,res, next) => { 
-	res.status(500).send("Algo está errado!");
+	res.status(500).send("500!");
+	res.status(404).send("NOT FOUND!");
+	console.log(err);
 };
 app.use(handleErros);
 
