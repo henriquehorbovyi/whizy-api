@@ -13,27 +13,34 @@ router.get('/auth/:user/:pass', (req, res) => {
   .from('users')
   .where({'login':req.params.user, 'password':req.params.pass})
   .limit(1)
-  .then( users => res.send(users[0]) );
+  .then( function(users){
+    var data = {message : "user not found!"}; 
+    if(users[0] != undefined){
+      data = users[0];  
+    }
+    res.json(data);
+  })
+  .catch(function(err) { res.send(err.stack) });
 });
 
 //FIND ONE SPECIFIC USER #DONE!
-router.get('/find/:user', (req, res) => {
+router.get('/find/:name', (req, res) => {
   knex.select('login','name','email','bio','birthday',
   			  'profile_picture','location','followers','following','skills')
   .from('users')
-  .where('login',req.params.user)
+  .where('login', req.params.name)
   .limit(1)
   .then( user => res.json(user[0]) );
 });
 
 //LIST ALL WITH PAGINATION #DONE!
-router.get('/page/:p/:l', (req, res) => {
+router.get('/page/:start/:limit', (req, res) => {
   knex.select('login','name','email','bio','birthday',
   			  'profile_picture','location','followers','following','skills')
   .from('users')
-  .offset(parseInt(req.params.p))
-  .limit(parseInt(req.params.l))
-  .then( users => res.json(users) );
+  .offset(parseInt(req.params.start))
+  .limit(parseInt(req.params.limit))
+  .then( users => res.json({users : users}) );
 });
 
 //TODO(CREATE_NEW_USER)
