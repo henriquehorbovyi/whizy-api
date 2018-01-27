@@ -11,7 +11,7 @@ router.get('/auth/:user/:pass', (req, res) => {
   knex.select('login','password','name','email','bio','birthday',
   			  'profile_picture','location','followers','following','skills')
   .from('users')
-  .where({'login':req.params.user, 'password':req.params.pass})
+  .where({'email':req.params.user, 'password':req.params.pass})
   .limit(1)
   .then( function(users){
     var data = {message : "user not found!"}; 
